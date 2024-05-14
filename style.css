@@ -1,0 +1,87 @@
+body{
+    background-image: url('bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    color:  white;
+}
+.navbar-transparent {
+background-color: rgba(173,216,230, 0.3);
+    border-color: transparent;
+}
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+.form-group label {
+    flex: 0 0 120px; 
+    margin-right: 10px; 
+}
+.form-group input {
+    flex: 1; 
+}
+
+.cards-wrapper{
+    display: flex;       
+    flex-wrap: wrap;     
+    gap: 20px;            
+    justify-content: flex-start; 
+    align-items: stretch; 
+}
+.popup{
+    display: none;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    background-color: antiquewhite;
+    z-index: 1000;
+}
+.card{
+    background-color: transparent;
+    background-color: rgba(173,216,230, 0.3);
+}
+
+.button {
+    background-color: rgb(173,216,230); /* Zöld háttérszín */
+    color: white; /* Fehér szövegszín */
+    padding: 15px 32px; /* Belső térköz */
+    text-align: center; /* Szöveg középre igazítása */
+    text-decoration: none; /* Nincs aláhúzás */
+    display: inline-block; /* Blokkos inline megjelenés */
+    font-size: 16px; /* Betűméret */
+    margin: 4px 2px; /* Külső térköz */
+    cursor: pointer; /* Mutató kurzor */
+    border: none; /* Nincs keret */
+    border-radius: 5px; /* Lekerekített sarkok */
+    transition-duration: 0.4s; /* Átmeneti időtartam */
+}
+
+#popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 300px; /* vagy bármilyen más megfelelő szélesség */
+    color: black;
+}
+
+/* Esetleges háttér homályosítása */
+#popup-backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
