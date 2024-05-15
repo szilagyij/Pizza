@@ -104,37 +104,53 @@ document.getElementById('szallasok').addEventListener('click', () => {
     });
 });
 
-function Edit(id){
-   let szerkeszt= document.getElementById(`edit`)
-   szerkeszt.style.display = 'block';
-   console.log(szerkeszt.style.display)
-    document.getElementById(`Modositfinal`).addEventListener('click',()=>{
-        let bodyforput=JSON.stringify({
-            id:Number(id),
-            name:document.getElementById(`megadnev`).value,
-            hostname:document.getElementById(`megadhostname`).value,
-            location:document.getElementById(`megadlocation`).value,
-            price:document.getElementById(`megadprice`).value
-        })
-      
-        // PUT-hoz kell az id az url végére
-        fetch("https://nodejs.sulla.hu/data/"+id, {
-          method: "PUT",
-          body: bodyforput,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(function(){
-            location.reload()
-        });
-    })
-    document.getElementById(`Modositback`).addEventListener('click',()=>{
-        document.getElementById('edit').style.display = 'none';
-    })
+function Edit(id) {
+    let szerkeszt = document.getElementById('edit');
+    szerkeszt.style.display = 'block';
 
-    
-  }
+    fetch(`https://nodejs.sulla.hu/data/${id}`)
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('megadnev').value = data.name;
+        document.getElementById('megadhostname').value = data.hostname;
+        document.getElementById('megadlocation').value = data.location;
+        document.getElementById('megadprice').value = data.price;
+    })
+    .catch(error => {
+        console.error('Hiba történt a kártya adatainak lekérése közben:', error);
+        alert('Hiba történt a kártya adatainak lekérése közben.');
+    });
+
+    document.getElementById('Modositfinal').addEventListener('click', () => {
+        let bodyforput = JSON.stringify({
+            id: Number(id),
+            name: document.getElementById('megadnev').value,
+            hostname: document.getElementById('megadhostname').value,
+            location: document.getElementById('megadlocation').value,
+            price: document.getElementById('megadprice').value
+        });
+
+ 
+        fetch(`https://nodejs.sulla.hu/data/${id}`, {
+            method: "PUT",
+            body: bodyforput,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(() => {
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Hiba történt a módosítás során:', error);
+            alert('Hiba történt a módosítás során.');
+        });
+    });
+
+    document.getElementById('Modositback').addEventListener('click', () => {
+        document.getElementById('edit').style.display = 'none';
+    });
+}
 
 
 function Delete(id){
