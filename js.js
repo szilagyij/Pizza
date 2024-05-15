@@ -38,7 +38,7 @@ document.getElementById('ujszallas').addEventListener('click', () => {
        let megadlocation=document.getElementById(`location`).value
        let megadprice=document.getElementById(`price`).value
         if (hostname=="" || minnight=="" || megadlocation=="" ||megadprice=="") {
-            alert("Mindent ki kell tölteni")
+            alert("Mindent ki kell tölteni!")
         } 
         else
         {
@@ -163,7 +163,7 @@ function More(id) {
         document.getElementById('pname').innerText =`Szállás neve:${data.name}`;
         document.getElementById('plocation').innerText =`Szállás Helyszíne:${data.location}`;
         document.getElementById('phostname').innerText = `Szállás elérhetősége:${data.hostname}`;
-        document.getElementById('pprice').innerText = `Szállás ára:${data.price}`;
+        document.getElementById('pprice').innerText = `Szállás ára:${data.price} Ft/Éj`;
     }).catch(error => {
         console.error('Hiba történt a kérés során:', error);
         alert('Hiba történt az adatok lekérése közben.');
