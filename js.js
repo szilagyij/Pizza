@@ -23,7 +23,7 @@ document.getElementById('ujszallas').addEventListener('click', () => {
     container.appendChild(createFormGroup("Név", "text", "host_name"));
     container.appendChild(createFormGroup("Hány éjszaka?", "text", "minimum_nights"));
     container.appendChild(createFormGroup("Helyszín","text","location"))
-    container.appendChild(createFormGroup("Ára /éjszaka?", "text", "price"));
+    container.appendChild(createFormGroup("Ára /éjszaka? PL.:'10000'", "number", "price"));
     
 
     let btn=document.createElement("button")
@@ -33,15 +33,24 @@ document.getElementById('ujszallas').addEventListener('click', () => {
 
 
     document.getElementById("save").onclick = function() {
+       let hostname= document.getElementById(`host_name`).value
+       let minnight=document.getElementById(`minimum_nights`).value
+       let megadlocation=document.getElementById(`location`).value
+       let megadprice=document.getElementById(`price`).value
+        if (hostname=="" || minnight=="" || megadlocation=="" ||megadprice=="") {
+            alert("Mindent ki kell tölteni")
+        } 
+        else
+        {
+            let bodyForPost = JSON.stringify({ 
+                hostname: document.getElementById("host_name").value,
+                location: document.getElementById("location").value,
+                minimum_nights: document.getElementById("minimum_nights").value,
+                name: document.getElementById("host_name").value,
+                price: Number(document.getElementById("price").value)
+            })
+        
 
-        // adatok input mezőkből kiolvasás JS objektumba
-        let bodyForPost = JSON.stringify({ 
-            hostname: document.getElementById("host_name").value,
-            location: document.getElementById("location").value,
-            minimum_nights: document.getElementById("minimum_nights").value,
-            name: document.getElementById("host_name").value,
-            price: Number(document.getElementById("price").value)
-        })
     
 
     fetch("https://www.nodejs.sulla.hu/data", {
@@ -58,6 +67,7 @@ document.getElementById('ujszallas').addEventListener('click', () => {
         alert('Hiba történt az adatok lekérése közben.');
     });
     }
+}
 
 
 
@@ -80,8 +90,6 @@ document.getElementById('szallasok').addEventListener('click', () => {
                 <div class="card-body">
                     <h5 class="card-title">${datas[i].name}</h5>
                     <h6 class="card-subtitle mb-2 text-muted feher">${datas[i].location}</h6>
-                    <p class="card-text">Elérhetőség: ${datas[i].hostname}</p>
-                    <p class="card-text">Ára: ${datas[i].price}</p>
                     <button class="button" onClick="Delete(${datas[i].id})">Töröl</button>
                     <button class="button" onClick="Edit(${datas[i].id})">Módosítás</button>
                     <button class="button" onClick="More(${datas[i].id})">Részletek</button>
@@ -152,10 +160,10 @@ function More(id) {
     .then(function(data) {
         let popup = document.getElementById('popup');
         popup.style.display = 'block';
-        document.getElementById('pname').innerText = data.name;
-        document.getElementById('plocation').innerText = data.location;
-        document.getElementById('phostname').innerText = data.hostname;
-        document.getElementById('pprice').innerText = data.price;
+        document.getElementById('pname').innerText =`Szállás neve:${data.name}`;
+        document.getElementById('plocation').innerText =`Szállás Helyszíne:${data.location}`;
+        document.getElementById('phostname').innerText = `Szállás elérhetősége:${data.hostname}`;
+        document.getElementById('pprice').innerText = `Szállás ára:${data.price}`;
     }).catch(error => {
         console.error('Hiba történt a kérés során:', error);
         alert('Hiba történt az adatok lekérése közben.');
@@ -166,9 +174,19 @@ function closePopup() {
     document.getElementById('popup').style.display = 'none';
 }
 
+function main(){
+    let container=document.getElementById(`container`)
+    container.innerHTML=`  
+    <h1>Szia! üdvözöllek!</h1>
+        <p>Üdvözöljük a DreamStay-n! Itt minden a tökéletes szállás megtalálásáról szól, legyen szó egy csendes vidéki menedékről, egy tengerparti villáról vagy egy városi apartmanról. Fedezze fel szálláshelyeink széles választékát és tervezze meg következő kikapcsolódását velünk! Foglaljon könnyedén, biztonságosan és élvezze előnyeinket. Várjuk, hogy üdvözölhessük Önt a világ bármely pontján!</p>
+       `
+}
 
+document.getElementById(`kezdo`).addEventListener('click',()=>{
+    main();
+})
 
-
+main();
 
 /*
 

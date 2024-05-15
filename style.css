@@ -6,6 +6,13 @@ body{
     width: 100%;
     height: 100%;
     color:  white;
+
+}
+.navbar-nav{
+    cursor: pointer;
+}
+.nav-link{
+    color: white;
 }
 .navbar-transparent {
 background-color: rgba(173,216,230, 0.3);
@@ -65,6 +72,8 @@ h6{
     border: none; /* Nincs keret */
     border-radius: 5px; /* Lekerekített sarkok */
     transition-duration: 0.4s; /* Átmeneti időtartam */
+    width: 50;
+    height: 50px;
 }
 
 #popup {
@@ -121,3 +130,5 @@ h6{
     z-index: 999;
     display: none;
 }
+
+
