@@ -31,6 +31,7 @@ background-color: rgba(173,216,230, 0.3);
     justify-content: flex-start; 
     align-items: stretch; 
 }
+
 .popup{
     display: none;
     top: 50%;
@@ -39,9 +40,16 @@ background-color: rgba(173,216,230, 0.3);
     background-color: antiquewhite;
     z-index: 1000;
 }
-.card{
+.card {
     background-color: transparent;
     background-color: rgba(173,216,230, 0.3);
+    color: white;
+}
+h6{
+    color:  white !important; 
+}
+.feher{
+    color: white!important;
 }
 
 .button {
@@ -76,6 +84,34 @@ background-color: rgba(173,216,230, 0.3);
 
 /* Esetleges háttér homályosítása */
 #popup-backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+
+#edit {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 300px; /* vagy bármilyen más megfelelő szélesség */
+    color: black;
+}
+
+/* Esetleges háttér homályosítása */
+#edit-backdrop {
     position: fixed;
     width: 100%;
     height: 100%;

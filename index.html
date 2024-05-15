@@ -32,7 +32,22 @@
         <h1 id="pname"></h1>
         <p id="plocation"></p>
         <p id="phostname"></p>
+        <p id="pprice"></p>
         <button onclick="closePopup()">Bezár</button>
+    </div>
+
+
+    <div id="edit" style="display: none;">
+        <label>Neve:</label>
+        <input type="text" id="megadnev"><br>
+        <label>Elérhetőség</label>
+        <input type="text" id="megadhostname"><br>
+        <label>Helyszín</label>
+        <input type="text" id="megadlocation"><br>
+        <label>Egy éjszaka ára:</label>
+        <input type="number" id="megadprice"><br>
+        <button id="Modositfinal">Módosítás</button>
+        <button id="Modositback">Mégsem</button>
     </div>
     
     <script src="js.js"></script>

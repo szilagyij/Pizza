@@ -79,8 +79,9 @@ document.getElementById('szallasok').addEventListener('click', () => {
             contentHTML += `<div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">${datas[i].name}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">${datas[i].location}</h6>
-                    <p class="card-text">Minimum éjszakák: ${datas[i].hostname}</p>
+                    <h6 class="card-subtitle mb-2 text-muted feher">${datas[i].location}</h6>
+                    <p class="card-text">Elérhetőség: ${datas[i].hostname}</p>
+                    <p class="card-text">Ára: ${datas[i].price}</p>
                     <button class="button" onClick="Delete(${datas[i].id})">Töröl</button>
                     <button class="button" onClick="Edit(${datas[i].id})">Módosítás</button>
                     <button class="button" onClick="More(${datas[i].id})">Részletek</button>
@@ -95,6 +96,52 @@ document.getElementById('szallasok').addEventListener('click', () => {
     });
 });
 
+function Edit(id){
+   let szerkeszt= document.getElementById(`edit`)
+   szerkeszt.style.display = 'block';
+   console.log(szerkeszt.style.display)
+    document.getElementById(`Modositfinal`).addEventListener('click',()=>{
+        let bodyforput=JSON.stringify({
+            id:Number(id),
+            name:document.getElementById(`megadnev`).value,
+            hostname:document.getElementById(`megadhostname`).value,
+            location:document.getElementById(`megadlocation`).value,
+            price:document.getElementById(`megadprice`).value
+        })
+      
+        // PUT-hoz kell az id az url végére
+        fetch("https://nodejs.sulla.hu/data/"+id, {
+          method: "PUT",
+          body: bodyforput,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(function(){
+            location.reload()
+        });
+    })
+    document.getElementById(`Modositback`).addEventListener('click',()=>{
+        document.getElementById('edit').style.display = 'none';
+    })
+
+    
+  }
+
+
+function Delete(id){
+    if (confirm("Biztos törlöd?")) {
+        fetch("https://nodejs.sulla.hu/data/"+id,{
+            method:"DELETE",
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(){
+            location.reload()
+        })
+    }
+}
 
 
 function More(id) {
@@ -108,6 +155,7 @@ function More(id) {
         document.getElementById('pname').innerText = data.name;
         document.getElementById('plocation').innerText = data.location;
         document.getElementById('phostname').innerText = data.hostname;
+        document.getElementById('pprice').innerText = data.price;
     }).catch(error => {
         console.error('Hiba történt a kérés során:', error);
         alert('Hiba történt az adatok lekérése közben.');
