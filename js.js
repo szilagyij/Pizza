@@ -105,21 +105,30 @@ document.getElementById('szallasok').addEventListener('click', () => {
 });
 
 function Edit(id) {
+
+
+
     let szerkeszt = document.getElementById('edit');
     szerkeszt.style.display = 'block';
 
-    fetch(`https://nodejs.sulla.hu/data/${id}`)
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('megadnev').value = data.name;
-        document.getElementById('megadhostname').value = data.hostname;
-        document.getElementById('megadlocation').value = data.location;
-        document.getElementById('megadprice').value = data.price;
-    })
-    .catch(error => {
-        console.error('Hiba történt a kártya adatainak lekérése közben:', error);
-        alert('Hiba történt a kártya adatainak lekérése közben.');
-    });
+        fetch(`https://nodejs.sulla.hu/data/${id}`)
+        .then(function(datas) {
+            return datas.json();
+        })
+        .then(function(data) {
+            document.getElementById('megadnev').value = data.name;
+            document.getElementById('megadhostname').value = data.hostname;
+            document.getElementById('megadlocation').value = data.location;
+            document.getElementById('megadprice').value = data.price;
+        }).catch(error => {
+            console.error('Hiba történt a kérés során:', error);
+            alert('Hiba történt az adatok lekérése közben.');
+        });
+
+
+
+
+
 
     document.getElementById('Modositfinal').addEventListener('click', () => {
         let bodyforput = JSON.stringify({
